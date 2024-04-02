@@ -9,6 +9,20 @@
   <table class="table table-striped">
     <thead>
       <tr>
+        <th style="white-space: nowrap;">
+          <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#adicionarUsuarioModal">
+            Adicionar
+          </button>
+          <a href="{% url 'logout' %}" class="btn btn-primary">Encerrar Sessão</a>
+        </th>
+        <th>
+          <form action="" method="GET" class="d-flex">
+            <input type="text" id="inputEmail" class="form-control me-2" name="email" placeholder="Buscar por Email">
+            <button type="submit" class="btn btn-primary">Buscar</button>
+          </form>
+        </th>
+      </tr>
+      <tr>
         <th>Nome</th>
         <th>Email</th>
         <!-- Adicione outras colunas conforme necessário -->
@@ -20,10 +34,54 @@
         <td>{{ usuario.nome }}</td>
         <td>{{ usuario.email }}</td>
         <!-- Adicione outras colunas conforme necessário -->
+        <td>
+          <a href="" class="btn btn-warning btn-sm">Editar</a>
+          <a href="{% url 'excluir_usuario' usuario.id %}" class="btn btn-danger btn-sm">Excluir</a>
+          <td>
+
       </tr>
       {% endfor %}
     </tbody>
   </table>
 </div>
+<!-- Modal para adicionar usuário -->
+<div class="modal fade" id="adicionarUsuarioModal" tabindex="-1" aria-labelledby="adicionarUsuarioModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <!-- Título do modal -->
+        <h5 class="modal-title" id="adicionarUsuarioModalLabel">Adicionar Usuário</h5>
+        <!-- Botão para fechar o modal -->
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <!-- Formulário de cadastro -->
+        <form action="{% url 'cadastro' %}" method="POST">
+          <!-- Token CSRF para proteção contra CSRF -->
+          {% csrf_token %}
+          <!-- Campo de entrada para o nome do usuário -->
+          <div class="mb-3">
+            <label for="nome" class="form-label">Nome</label>
+            <input type="text" class="form-control" id="nome" name="nome">
+          </div>
+          <!-- Campo de entrada para o email do usuário -->
+          <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" name="email">
+          </div>
+          <!-- Campo de entrada para a senha do usuário -->
+          <div class="mb-3">
+            <label for="senha" class="form-label">Senha</label>
+            <input type="password" class="form-control" id="senha" name="senha">
+          </div>
+          <!-- Botão de submit para enviar o formulário -->
+          <button type="submit" class="btn btn-primary">Salvar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 
 {% endblock %}

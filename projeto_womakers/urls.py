@@ -16,12 +16,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from cadastro.views import inicio, cadastro
+from cadastro.views import inicio, cadastro, logout_user, verificar_cadastro, excluir_usuario
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('home/', inicio),
+    path('home/', inicio, name='home'),
     path('cadastro/', cadastro, name='cadastro'),
+    path('verificar-cadastro/', verificar_cadastro, name='verificar_cadastro'),
+    path('logout/', logout_user, name='logout'),
+    path('excluir_usuario/<int:usuario_id>/', excluir_usuario, name='excluir_usuario'),
     path('api-auth/', include('rest_framework.urls')),
     path('api/', include('rest_api.urls', namespace='api')),
 ]

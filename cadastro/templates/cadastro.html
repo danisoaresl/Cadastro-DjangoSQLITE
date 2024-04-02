@@ -3,19 +3,38 @@
 {% block principal %}
 {% load static %}
 
-  <h1 class="text-body-emphasis">Cadastro de usuários</h1>
-  <br>
-  <div class="text-center">
-    <img src="{% static 'imagens/womakerscode.png'%}" alt="Logo Womakers" class="img-fluid">
+<div class="row">
+  <div class="col-md-6">
+    <h1 class="text-body-emphasis">Cadastro</h1>
+    <br>
+    {% if sucesso %}
+      <p class="alert alert-success"> Cadastro realizado com sucesso </p>
+    {% else %}
+      <form action="" method="POST" id="form" novalidate>
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        <button type="submit" class="btn btn-primary btn-block">Cadastrar</button>
+      </form>
+    {% endif %}
+
   </div>
-  
-  {% if sucesso %}
-    <p class="alert alert-success"> Cadastro realizado com sucesso </p>
-  {% else %}
-    <form action="" method="POST" id="form" novalidate>
+
+  <div class="col-md-6">
+    <h1 class="text-body-emphasis">Login</h1>
+    <br>
+    <form action="{% url 'verificar_cadastro' %}" method="POST" id="login-form" novalidate>
       {% csrf_token %}
-      {% bootstrap_form form %}
-      <button type="submit" class="btn btn-primary btn-block">Cadastrar</button>
+      <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" class="form-control" id="email" name="email">
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label">Senha</label>
+        <input type="password" class="form-control" id="password" name="password">
+      </div>
+      <button type="submit" class="btn btn-primary btn-block">Login</button>
     </form>
-  {% endif %}
+</div>
+ 
+
 {% endblock %}

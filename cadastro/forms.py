@@ -7,3 +7,4 @@ class CadastroForm(forms.ModelForm):
         model = Cadastro
         fields = ['nome', 'email', 'senha']
         
+    
