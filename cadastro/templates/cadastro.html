@@ -10,7 +10,7 @@
     {% if sucesso %}
       <p class="alert alert-success"> Cadastro realizado com sucesso </p>
     {% else %}
-      <form action="" method="POST" id="form" novalidate>
+      <form action="" method="POST" enctype="multipart/form-data" id="form" novalidate>
         {% csrf_token %}
         {% bootstrap_form form %}
         <button type="submit" class="btn btn-primary btn-block">Cadastrar</button>
@@ -30,7 +30,7 @@
       </div>
       <div class="mb-3">
         <label for="password" class="form-label">Senha</label>
-        <input type="password" class="form-control" id="password" name="password">
+        <input type="password" class="form-control" id="senha" name="senha">
       </div>
       <button type="submit" class="btn btn-primary btn-block">Login</button>
     </form>

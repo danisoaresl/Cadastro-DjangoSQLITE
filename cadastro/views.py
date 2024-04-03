@@ -12,7 +12,7 @@ def inicio(request):
 def cadastro(request):
     sucesso = False 
     #if request.method == 'GET':
-    form = CadastroForm(request.POST or None)
+    form = CadastroForm(request.POST, request.FILES)
     if form.is_valid(): 
         sucesso = True
         form.save()
@@ -37,7 +37,7 @@ def verificar_cadastro(request):
         senha = request.POST.get('senha')
         
         # Verifica se existe um usuário com o email fornecido
-        if Cadastro.objects.filter(email=email).exists():
+        if Cadastro.objects.filter(email=email, senha=senha).exists():
             # Usuário foi cadastrado com sucesso
             return render(request, 'cadastro_logado.html', {'usuarios': Cadastro.objects.all()})
         else:

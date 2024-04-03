@@ -5,6 +5,7 @@ from django.db import models
 class Cadastro(models.Model):
     nome = models.CharField(max_length=50)
     email = models.EmailField(max_length=50, unique=True)
+    image = models.ImageField(upload_to='images/', null=True, blank=True)
     senha = models.CharField(max_length=50)
     data = models.DateTimeField(auto_now_add=True)
     def __str__(self):
