@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from cadastro.views import inicio, cadastro, logout_user, verificar_cadastro, excluir_usuario
+from cadastro.views import inicio, cadastro, logout_user, verificar_cadastro, excluir_usuario, editar_usuario
 from django.conf.urls.static import static
 from django.conf import settings
 
@@ -27,6 +27,7 @@ urlpatterns = [
     path('verificar-cadastro/', verificar_cadastro, name='verificar_cadastro'),
     path('logout/', logout_user, name='logout'),
     path('excluir_usuario/<int:usuario_id>/', excluir_usuario, name='excluir_usuario'),
+    path('editar_usuario/<int:usuario_id>/', editar_usuario, name='editar_usuario'),
     path('api-auth/', include('rest_framework.urls')),
     path('api/', include('rest_api.urls', namespace='api')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
